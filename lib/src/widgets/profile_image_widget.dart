@@ -31,7 +31,7 @@ class _ProfileImageState extends State<ProfileImage> {
           ),
           borderRadius: BorderRadius.circular(_hovered ? 20 : 10),
           image: DecorationImage(
-            image: AssetImage('../assets/images/profile.jpg'),
+            image: AssetImage('assets/images/profile.jpg'),
             fit: BoxFit.cover,
           ),
         ),

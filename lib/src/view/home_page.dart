@@ -59,14 +59,14 @@ class HomePage extends StatelessWidget {
 
                   // Body -> Pessoal -> Github
                   LinkWidget(
-                    pathToIcon: '../assets/icons/github.svg',
+                    pathToIcon: 'assets/icons/github.svg',
                     name: 'Github',
                     desc: 'Aqui estão os códigos dos meus projetos.',
                     url: 'https://github.com/murilomonte',
                   ),
                   SizedBox(height: 10),
                   LinkWidget(
-                    pathToIcon: '../assets/icons/link.svg',
+                    pathToIcon: 'assets/icons/link.svg',
                     name: 'Portfolio (WIP)',
                     desc: 'Meus últimos projetos estão aqui. (WIP)',
                     url: 'https://github.com/murilomonte',
@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   LinkWidget(
-                    pathToIcon: '../assets/icons/instagram.svg',
+                    pathToIcon: 'assets/icons/instagram.svg',
                     name: 'Fotografia',
                     desc: 'Fotos que tiro no tempo livre. :)',
                     url: 'https://www.instagram.com/lun.witch/',
