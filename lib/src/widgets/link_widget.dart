@@ -28,7 +28,7 @@ class _LinkWidgetState extends State<LinkWidget> {
   bool _hovered = false;
 
   Future<void> _launchUrl() async {
-    if (!await launchUrl(Uri.parse(widget._url))) {
+    if (!await launchUrl(Uri.parse(widget._url), webOnlyWindowName: "_self")) {
       throw Exception('Could not launch ${widget._url}');
     }
   }
