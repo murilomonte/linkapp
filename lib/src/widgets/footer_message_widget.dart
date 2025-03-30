@@ -28,9 +28,13 @@ class _FooterMessageState extends State<FooterMessage> {
 
   void showSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        behavior: SnackBarBehavior.floating,
+        width: 500,
+      ),
+    );
   }
 
   void devMsgCounter(BuildContext context) {
