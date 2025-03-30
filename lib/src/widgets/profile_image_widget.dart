@@ -27,7 +27,7 @@ class _ProfileImageState extends State<ProfileImage> {
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
-            color: _hovered ? Colors.yellowAccent.shade700 : Colors.transparent,
+            color: _hovered ? Theme.of(context).colorScheme.primary : Colors.transparent,
           ),
           borderRadius: BorderRadius.circular(_hovered ? 20 : 10),
           image: DecorationImage(
