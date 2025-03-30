@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:linkapp/src/theme/dark_theme.dart';
-import 'package:linkapp/src/theme/light_theme.dart';
+import 'package:linkapp/src/controllers/theme_controller.dart';
 import 'package:linkapp/src/view/home_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(LinkApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeController(),
+      child: LinkApp(),
+    )
+  );
 }
 
 class LinkApp extends StatelessWidget {
@@ -13,9 +18,7 @@ class LinkApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: lightMode,
-      darkTheme: darkMode,
-      themeMode: ThemeMode.dark,
+      theme: context.watch<ThemeController>().themeData,
       home: HomePage(),
     );
   }

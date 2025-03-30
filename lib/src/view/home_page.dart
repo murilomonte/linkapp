@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:linkapp/src/controllers/theme_controller.dart';
+import 'package:linkapp/src/widgets/footer_message_widget.dart';
 import 'package:linkapp/src/widgets/link_widget.dart';
 import 'package:linkapp/src/widgets/profile_image_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -86,40 +89,32 @@ class HomePage extends StatelessWidget {
                     pathToIcon: '../assets/icons/instagram.svg',
                     name: 'Fotografia',
                     desc: 'Fotos que tiro no tempo livre. :)',
-                    url: 'https://www.instagram.com/lun.witch/'
+                    url: 'https://www.instagram.com/lun.witch/',
                   ),
                   SizedBox(height: 10),
+
                   // Footer
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 5,
                     children: [
+
+                      // Dark/light mode button
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<ThemeController>().toggleTheme();
+                        },
                         icon: Icon(
-                          Icons.light_mode_outlined,
+                          context.read<ThemeController>().isDarkMode
+                              ? Icons.light_mode_outlined
+                              : Icons.dark_mode_outlined,
                           size: 18,
                           color: Theme.of(context).colorScheme.surfaceDim,
                         ),
                       ),
-                      InkWell(
-                        hoverColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () {},
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Feito com 🪄 e Flutter.',
-                            style: GoogleFonts.nunito(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w800,
-                              color: Theme.of(context).colorScheme.surfaceDim,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
+
+                      // Rodapé
+                      FooterMessage(),
                     ],
                   ),
                 ],
@@ -131,3 +126,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
