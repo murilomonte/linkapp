@@ -13,6 +13,9 @@ class _ProfileImageState extends State<ProfileImage> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () {},
       onHover: (value) {
         setState(() {
@@ -22,7 +25,11 @@ class _ProfileImageState extends State<ProfileImage> {
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(_hovered ? 50 : 10),
+          border: Border.all(
+            width: 2,
+            color: _hovered ? Colors.yellowAccent.shade700 : Colors.transparent,
+          ),
+          borderRadius: BorderRadius.circular(_hovered ? 20 : 10),
           image: DecorationImage(
             image: AssetImage('../assets/images/profile.jpg'),
             fit: BoxFit.cover,

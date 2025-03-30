@@ -1,6 +1,6 @@
 {
-    "name": "linkapp",
-    "short_name": "linkapp",
+    "name": "Links",
+    "short_name": "Links",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

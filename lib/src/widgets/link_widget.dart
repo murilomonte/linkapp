@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LinkWidget extends StatefulWidget {
+  final String _pathToIcon;
   final String _name;
   final String _desc;
+  final String _url;
 
-  const LinkWidget({super.key, required name, required desc})
-    : _name = name,
-      _desc = desc;
+  const LinkWidget({
+    super.key,
+    required name,
+    required desc,
+    required pathToIcon,
+    required url,
+  }) : _name = name,
+       _desc = desc,
+       _pathToIcon = pathToIcon,
+       _url = url;
 
   @override
   State<LinkWidget> createState() => _LinkWidgetState();
@@ -15,10 +27,19 @@ class LinkWidget extends StatefulWidget {
 class _LinkWidgetState extends State<LinkWidget> {
   bool _hovered = false;
 
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(Uri.parse(widget._url))) {
+      throw Exception('Could not launch ${widget._url}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () => _launchUrl(),
       onHover: (value) {
         setState(() {
           _hovered = value;
@@ -29,11 +50,17 @@ class _LinkWidgetState extends State<LinkWidget> {
         duration: Duration(milliseconds: 200),
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
-          color: _hovered ? Color.fromARGB(255, 41, 41, 41) : Color(0xFF242424),
-          borderRadius: BorderRadius.circular(15),
+          color:
+              _hovered
+                  ? Theme.of(context).colorScheme.onInverseSurface
+                  : Theme.of(context).colorScheme.surfaceContainer,
+          borderRadius: BorderRadius.circular(_hovered ? 20 : 10),
           border: Border.all(
             width: 2,
-            color: _hovered ? const Color(0xFF2A82FA) : Colors.transparent,
+            color:
+                _hovered
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.transparent,
           ),
         ),
         child: Padding(
@@ -41,9 +68,14 @@ class _LinkWidgetState extends State<LinkWidget> {
           child: Row(
             spacing: 15,
             children: [
-              CircleAvatar(
-                backgroundColor: const Color.fromARGB(255, 51, 51, 51),
-                child: Icon(Icons.home),
+              SvgPicture.asset(
+                widget._pathToIcon,
+                width: 28,
+                height: 28,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.primary,
+                  BlendMode.srcIn,
+                ),
               ),
               Expanded(
                 child: Column(
@@ -51,11 +83,20 @@ class _LinkWidgetState extends State<LinkWidget> {
                   children: [
                     Text(
                       widget._name,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: GoogleFonts.nunito(
+                        fontSize: 16,
+                        height: 1,
+                        fontWeight: FontWeight.w700,
+                      ),
                       overflow: TextOverflow.visible,
                     ),
                     Text(
                       widget._desc,
+                      style: GoogleFonts.lato(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                       overflow: TextOverflow.visible,
                       softWrap: true,
                     ),
